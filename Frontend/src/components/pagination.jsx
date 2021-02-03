@@ -3,7 +3,7 @@ import _ from "lodash";
 import ArrowButton from "./navigation/arrowButton";
 import Page from "./navigation/page";
 
-function Pagiantion({
+function Pagination({
   onPageChange,
   pagesAllowed,
   currentPage,
@@ -46,4 +46,4 @@ function Pagiantion({
   );
 }
 
-export default Pagiantion;
+export default Pagination;

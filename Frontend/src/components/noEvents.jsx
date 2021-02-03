@@ -3,7 +3,8 @@ import React from "react";
 function NoEvents({ onRefresh }) {
   return (
     <div className="center">
-      <span>No events in the db</span>
+      <p>Sorry for the inconvenience, we weren't able to access the data.</p>
+      <p>Please try again later, or try refreshing the page.</p>
       <button
         className="btn btn-primary btn-sm m-2"
         onClick={() => onRefresh()}
