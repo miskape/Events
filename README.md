@@ -12,7 +12,7 @@
 
 # Back-end
 
-* Read JSON from MyHelsinki Open API: http://open-api.myhelsinki.fi/v1/events/
+* Read JSON from MyHelsinki Open API
 * Map wanted data to domain model
 * Return event data with API commands
 
