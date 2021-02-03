@@ -5,7 +5,7 @@
 # Front-end
 ![](Images/events_front.PNG)
 
-* API call to backend
+* Fetch data from back-end
 * Lists Name, Address and Info into a table
 * Pagination of size 10
 * Page size as input (0-50)
