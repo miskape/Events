@@ -71,7 +71,7 @@ class Events extends Component {
     const pagesTotal = Math.ceil(allEvents.length / pageSize);
     const events = paginate(allEvents, currentPage, pageSize);
 
-    if (data === false) {
+    if (!data) {
       return <NoEvents onRefresh={this.handleRefresh} />;
     }
 
