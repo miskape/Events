@@ -1,5 +1,8 @@
 package com.backend.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -8,6 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @Entity
+@JsonFilter("EventsFilter")
 public class Event {
 
     @Id
@@ -16,7 +20,7 @@ public class Event {
     private Long e_id;
 
     private String info;
-    private String eName;
+    private String event_name;
     private String full_address;
 
     @Embedded

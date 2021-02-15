@@ -3,6 +3,10 @@ package com.backend.demo.controller;
 
 import com.backend.demo.model.Event;
 import com.backend.demo.service.EventService;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,19 +32,35 @@ public class EventController {
 
     // Get all the events
     @GetMapping("/all")
-    public Iterable<Event> getAllEvents() {
-        return eventService.list();
+    public MappingJacksonValue getAllEvents() {
+        Iterable<Event> events = eventService.list();
+        MappingJacksonValue mappingJacksonValue = getMappingJacksonValue(events);
+        return mappingJacksonValue;
     }
+
 
     // Get specific amount of events, starting from id = 1 to {number}
     @GetMapping(path = "{number}")
-    public Iterable<Event> getAmountOfEvents(@PathVariable("number") Long number) {
-        return eventService.listAmount(number);
+    public MappingJacksonValue getAmountOfEvents(@PathVariable("number") Long number) {
+        Iterable<Event> events = eventService.listAmount(number);
+        MappingJacksonValue mappingJacksonValue = getMappingJacksonValue(events);
+        return mappingJacksonValue;
     }
 
     // Select all events between two ids
     @GetMapping(path = "/{n1}/{n2}")
-    public Iterable<Event> getEventsBetween(@PathVariable("n1") Long n1, @PathVariable("n2") Long n2) {
-        return eventService.listBetween(n1, n2);
+    public MappingJacksonValue getEventsBetween(@PathVariable("n1") Long n1, @PathVariable("n2") Long n2) {
+        Iterable<Event> events = eventService.listBetween(n1, n2);
+        MappingJacksonValue mappingJacksonValue = getMappingJacksonValue(events);
+        return mappingJacksonValue;
+    }
+
+    // Lets filter events, and only return {"e_id", "info", "event_name", "full_address"}
+    private MappingJacksonValue getMappingJacksonValue(Iterable<Event> events) {
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("e_id", "info", "event_name", "full_address");
+        FilterProvider filters = new SimpleFilterProvider().addFilter("EventsFilter", filter);
+        MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(events);
+        mappingJacksonValue.setFilters(filters);
+        return mappingJacksonValue;
     }
 }

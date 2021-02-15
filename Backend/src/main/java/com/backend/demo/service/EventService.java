@@ -48,7 +48,7 @@ public class EventService {
             events.get(i).setInfo(setEventInfo(
                     events.get(i).getEvent_dates().getStarting_day(),
                     events.get(i).getEvent_dates().getEnding_day()));
-            events.get(i).setEName(setEventName(
+            events.get(i).setEvent_name(setEventName(
                     events.get(i).getName().getFi(),
                     events.get(i).getName().getEn(),
                     events.get(i).getName().getSv(),
